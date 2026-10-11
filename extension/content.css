@@ -1,0 +1,20 @@
+/*
+ * Wildberries Analytics — базовые стили content script.
+ *
+ * ВАЖНО: основной UI расширения живёт внутри Shadow DOM и стилизуется
+ * там же (см. SHADOW_STYLES в content.js). Этот файл намеренно минимален —
+ * он нужен только для host-элемента, чтобы тот не влиял на вёрстку WB.
+ * Мы не трогаем стили самого Wildberries, чтобы ничего не сломать.
+ */
+
+#wb-analytics-host {
+  all: initial;
+  position: static;
+  z-index: 2147483000;
+}
+
+/* Host-элементы бейджей на карточках выдачи */
+.wba-badge-host {
+  all: initial;
+  display: block;
+}

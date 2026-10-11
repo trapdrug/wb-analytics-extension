@@ -1,0 +1,10 @@
+# Данные и логи backend'а (создаются при работе)
+backend/wb.sqlite
+backend/wb.sqlite-shm
+backend/wb.sqlite-wal
+backend/*.log
+backend/node_modules/
+
+# Системные файлы
+.DS_Store
+Thumbs.db

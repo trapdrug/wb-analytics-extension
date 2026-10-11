@@ -1,0 +1,15 @@
+{
+  "name": "wb-analytics-backend",
+  "version": "1.0.0",
+  "description": "Локальный backend для расширения WB Analytics (Node.js + встроенный node:sqlite, без внешних зависимостей)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node e2e_test.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "license": "MIT",
+  "private": true
+}
