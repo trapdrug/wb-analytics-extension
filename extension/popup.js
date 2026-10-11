@@ -38,6 +38,13 @@ function fmtMoneyShort(value) {
   return Math.round(n) + ' ₽';
 }
 
+/** Экранирует HTML-спецсимволы (защита от XSS при вставке через innerHTML). */
+function esc(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
+  );
+}
+
 /** Обрезает длинное название товара. */
 function clip(text, max) {
   const s = String(text || '');
@@ -81,7 +88,7 @@ function renderTop(top) {
   top.forEach((item, i) => {
     const li = document.createElement('li');
     li.innerHTML =
-      '<span class="item-title">' + (i + 1) + '. ' + clip(item.name, 32) + '</span>' +
+      '<span class="item-title">' + (i + 1) + '. ' + esc(clip(item.name, 32)) + '</span>' +
       '<span class="item-meta">' +
         '<span>nm ' + item.nm_id + '</span>' +
         '<span>~' + fmtMoneyShort(item.revenuePerDay) + '/день</span>' +
@@ -101,7 +108,7 @@ function renderRecent(products) {
   products.forEach((p) => {
     const li = document.createElement('li');
     li.innerHTML =
-      '<span class="item-title">' + clip(p.name, 34) + '</span>' +
+      '<span class="item-title">' + esc(clip(p.name, 34)) + '</span>' +
       '<span class="item-meta">' +
         '<span>' + fmtMoney(p.price) + '</span>' +
         '<span>★ ' + (p.rating ? p.rating : '—') + '</span>' +

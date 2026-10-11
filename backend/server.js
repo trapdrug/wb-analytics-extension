@@ -157,7 +157,8 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, () => {
+// Строго localhost: сервер не должен быть доступен из локальной сети.
+server.listen(PORT, '127.0.0.1', () => {
   console.log('[WBAnalytics][api] backend слушает http://127.0.0.1:' + PORT);
   console.log('[WBAnalytics][api] БД:', require('./db').DB_PATH);
 });

@@ -59,6 +59,13 @@
     return Number.isFinite(n) ? n : 0;
   }
 
+  /** Экранирует HTML-спецсимволы (защита от XSS при вставке через innerHTML). */
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
+    );
+  }
+
   /** Форматирует число в денежный вид: 1299 -> «1 299 ₽». */
   function fmtMoney(value) {
     const n = Number(value);
@@ -944,7 +951,7 @@
       </div>
       <div class="wba-row">
         <span class="wba-row__label">Продавец</span>
-        <span class="wba-row__value" data-field="seller">${product.seller || '—'}</span>
+        <span class="wba-row__value" data-field="seller">${esc(product.seller) || '—'}</span>
       </div>
       <div class="wba-row">
         <span class="wba-row__label">Скорость продаж</span>
